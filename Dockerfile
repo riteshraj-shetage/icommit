@@ -8,4 +8,4 @@ RUN bun install --frozen-lockfile
 
 COPY . .
 
-ENTRYPOINT [ "bun", "run", "/app/scripts/engine.ts" ]
+ENTRYPOINT ["sh", "-c", "bun run /app/scripts/engine.ts && cd /app/frontend && bun install && bun run build"]
