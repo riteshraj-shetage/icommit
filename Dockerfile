@@ -11,4 +11,4 @@ WORKDIR /app
 
 COPY --from=builder /app /app
 
-ENTRYPOINT ["sh", "-c", "bun run /app/core/src/index.ts && cd /app/ui && bun install && bun run build"]
+ENTRYPOINT ["sh", "-c", "bun run /app/core/index.ts && cd /app/ui && bun install && bun run build"]
