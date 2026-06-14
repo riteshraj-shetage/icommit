@@ -1,1 +1,1 @@
-import "./scripts/engine.ts";
+import "./core/index.ts";

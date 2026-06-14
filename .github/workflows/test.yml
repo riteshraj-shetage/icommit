@@ -1,4 +1,4 @@
-name: Pipeline Integration Test
+name: Test Workflow
 
 on: 
   push:
@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  test-engine:
+  test-workflow:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -18,4 +18,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Verify data
-        run: cat frontend/public/gh-data.json
+        run: cat ui/public/gh-data.json

@@ -1,0 +1,18 @@
+# Example 'deploy.yml'
+
+name: Deploy Workflow
+
+on:
+  push:
+    branches: [ main ]
+  
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+    # to be continued with deployment steps...

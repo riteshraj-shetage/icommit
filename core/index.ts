@@ -63,7 +63,7 @@ async function fetchGitHubData() {
 
     const userData = result.data.user;
 
-    const targetPath = join(process.cwd(), "frontend", "public", "gh-data.json");
+    const targetPath = join(process.cwd(), "ui", "public", "gh-data.json");
     await Bun.write(targetPath, JSON.stringify(userData, null, 2));
 
   } catch (error) {
