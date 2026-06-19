@@ -1,10 +1,12 @@
-# Example 'deploy.yml'
+# Example 'autocrafts.yml'
 
-name: Deploy Workflow
+name: Generate GitHub Portfolio
 
 on:
-  push:
-    branches: [ main ]
+  # Triggers the workflow at midnight UTC every day / Adjust the cron schedule as needed.
+  schedule:
+    - cron: '0 0 * * *' 
+  # OR Run it manually thru the GitHub Actions tab
   workflow_dispatch:
 
 # Required strictly for GitHub Pages deployment
@@ -24,28 +26,31 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      # 1. Run the Engine to generate json files
-      - name: Execute Native Intelligence Engine
-        uses: ./
+      # 1. Use a custom action to fetch GitHub data and generate a JSON payload for the portfolio
+      - name: Generate JSON payload
+        uses: riteshraj-shetage/?@v1.0.0
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GITHUB_PAT }}
+          config-file: './config.json'
 
-      # 2. Provision Bun for the frontend build
-      - name: Provision Bun
+      # 2.
+
+      # 3. Setup Bun
+      - name: Setup Bun environment
         uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
 
-      # 3. Compile the Vite/React UI 
-      - name: Build Engineered Truth UI
+      # 4. Compile the Vite/React UI 
+      - name: Build the React Portfolio
         run: |
           bun install --frozen-lockfile
           bun run build
 
-      # 4. Package the Vite output 
-      - name: Upload Pages Artifact
+      # 5. Package the Vite output 
+      - name: Upload Vite Build Artifacts
         uses: actions/upload-pages-artifact@v3
         with:
           path: './dist' 
 
-      # to be continued with deployment steps...
+      # to be comtinued with GitHub Pages deployment steps

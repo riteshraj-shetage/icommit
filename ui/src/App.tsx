@@ -1,25 +1,9 @@
-import { useEffect, useState } from 'react'
 import './App.css'
+import payload from './data/payload.json' 
 
-interface GitHubProfile {
-  login: string
-  name: string | null
-  bio: string | null
-  avatarUrl: string
-  followers?: { totalCount: number }
-  repositories?: { totalCount: number }
-}
+const { profile } = payload;
 
 export default function App() {
-  const [profile, setProfile] = useState<GitHubProfile | null>(null)
-
-  useEffect(() => {
-    fetch('/gh-data.json')
-      .then((res) => res.json())
-      .then((data) => setProfile(data as GitHubProfile))
-      .catch(() => console.warn("Waiting for icommit telemetry node to populate..."))
-  }, [])
-
   return (
     <div className="relative min-h-screen bg-[#0a0a0a] text-white font-sans flex flex-col items-center justify-center p-6 overflow-hidden select-none">
   
@@ -38,10 +22,10 @@ export default function App() {
         
         <div className="flex items-center space-x-2 border border-zinc-900 bg-zinc-950/40 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-zinc-400">
           <span className="relative flex h-2 w-2">
-            <span className={`animate-ping absolute inline-flex h-full w-full opacity-75 ${!profile ? 'bg-amber-400' : 'bg-emerald-400'}`}></span>
-            <span className={`relative inline-flex h-2 w-2 ${!profile ? 'bg-amber-500' : 'bg-emerald-500'}`}></span>
+            <span className="animate-ping absolute inline-flex h-full w-full opacity-75 bg-emerald-400"></span>
+            <span className="relative inline-flex h-2 w-2 bg-emerald-500"></span>
           </span>
-          <span>autocrafts-io - {!profile ? 'Syncing...' : 'Test page'}</span>
+          <span>autocrafts</span>
         </div>
 
         {profile?.avatarUrl && (

@@ -1,8 +1,6 @@
 name: Test Workflow
 
 on: 
-  push:
-    branches: [main]
   workflow_dispatch:
 
 jobs:
@@ -12,10 +10,5 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Execute Native Action
-        uses: ./
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Verify Output
-        run: cat ui/public/gh-data.json
+      # use custom action to fetch payload from github for frontend
+      
