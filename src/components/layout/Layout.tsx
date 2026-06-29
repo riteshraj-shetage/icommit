@@ -10,10 +10,10 @@ type LayoutProps = PropsWithChildren<{
 
 export default function Layout({ children, username, starsCount, forkCount }: LayoutProps) {
   return (
-    <div className="min-h-screen bg-background flex flex-col">
+    <div className="min-h-dvh bg-background flex flex-col">
       <Navbar username={username} starsCount={starsCount} forkCount={forkCount} />
       
-      <main className="mx-auto w-full max-w-4xl flex-1 px-6">
+      <main className="mx-auto w-full max-w-4xl flex-1 flex flex-col px-4 sm:px-6 py-6 md:py-8">
         {children}
       </main>
       
